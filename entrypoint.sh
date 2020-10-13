@@ -1,7 +1,4 @@
-#!/bin/sh
-
-mkdir v2ray
-cd v2ray
+cd /v2ray
 
 # Download V2Ray
 if [ "$VER" = "latest" ]; then
