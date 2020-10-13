@@ -7,12 +7,3 @@ curl -L -H "Cache-Control: no-cache" -o /tmp/v2ray/v2ray.zip https://github.com/
 unzip /tmp/v2ray/v2ray.zip -d /tmp/v2ray
 install -m 755 /tmp/v2ray/v2ray /usr/local/bin/v2ray
 install -m 755 /tmp/v2ray/v2ctl /usr/local/bin/v2ctl
-
-
-# Remove temporary directory
-rm -rf /tmp/v2ray
-
-
-# chmod +x 给与文件执行权限
-chmod +x v2ray v2ctl
-
