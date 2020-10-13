@@ -1,6 +1,6 @@
 FROM alpine:3.5
 
-RUN apk add --no-cache --virtual .build-deps ca-certificates wget unzip
+RUN apk add --no-cache --virtual .build-deps ca-certificates curl unzip
 
 RUN mkdir -m 777 /v2ray
 
