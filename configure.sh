@@ -14,7 +14,7 @@ chmod +x v2ray v2ctl
 if [ "$PROTOCOL" = "vless" ]; then
   cp -f /server_config_vless.json config.json
 else
-  cp -f /server_config_vmess.json server_config_vmess.json
+  cp -f /server_config_vmess.json .
 fi
 
 
