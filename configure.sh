@@ -1,44 +1,28 @@
-#!/bin/sh
+mkdir v2ray
+cd v2ray
 
-# Download and install V2Ray
-mkdir /tmp/v2ray
-curl -L -H "Cache-Control: no-cache" -o /tmp/v2ray/v2ray.zip https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-64.zip
-unzip /tmp/v2ray/v2ray.zip -d /tmp/v2ray
-install -m 755 /tmp/v2ray/v2ray /usr/local/bin/v2ray
-install -m 755 /tmp/v2ray/v2ctl /usr/local/bin/v2ctl
+# Download V2Ray
+# wget --no-check-certificate -O v2ray.zip https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-64.zip
+curl -L -H "Cache-Control: no-cache" -o v2ray.zip https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-64.zip
 
-# Remove temporary directory
-rm -rf /tmp/v2ray
+unzip v2ray.zip
 
-# V2Ray new configuration
-install -d /usr/local/etc/v2ray
-cat << EOF > /usr/local/etc/v2ray/config.json
-{
-    "inbounds": [
-        {
-            "port": $PORT,
-            "protocol": "vmess",
-            "settings": {
-                "clients": [
-                    {
-                        "id": "$UUID",
-                        "alterId": 64
-                    }
-                ],
-                "disableInsecureEncryption": true
-            },
-            "streamSettings": {
-                "network": "ws"
-            }
-        }
-    ],
-    "outbounds": [
-        {
-            "protocol": "freedom"
-        }
-    ]
-}
-EOF
+echo "执行"
+# chmod +x 给与文件执行权限
+chmod +x v2ray v2ctl
 
-# Run V2Ray
-/usr/local/bin/v2ray -config /usr/local/etc/v2ray/config.json
+if [ "$PROTOCOL" = "vless" ]; then
+  # cp 是复制，-f 是强制复制
+  cp -f /server_config_vless.json config.json
+else
+  cp -f /server_config_vmess.json config.json
+fi
+
+# sed -i 就是直接对文本文件进行操作
+# sed -i 's/原字符串/新字符串/g' 文件地址
+sed -i "s/your_uuid/$UUID/g" config.json
+sed -i "s/your_path/$PATH/g" config.json
+
+# nohup 加在一个命令的最前面，表示不挂断的运行命令
+# & 加在一个命令的最后面，表示这个命令放在后台执行
+nohup ./v2ray &
