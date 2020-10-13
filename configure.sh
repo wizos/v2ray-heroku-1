@@ -7,11 +7,9 @@ curl -L -H "Cache-Control: no-cache" -o v2ray.zip https://github.com/v2fly/v2ray
 
 unzip v2ray.zip
 
-echo "执行A"
 # chmod +x 给与文件执行权限
 chmod +x v2ray v2ctl
 
-echo "执行b"
 if [ "$PROTOCOL" = "vless" ]; then
   cp -f /server_config_vless.json .
   mv server_config_vless.json config.json
@@ -20,12 +18,9 @@ else
   mv server_config_vmess.json config.json
 fi
 
-echo "执行C"
 sed -i "s/your_uuid/$UUID/g" config.json
 sed -i "s/your_path/$WSPATH/g" config.json
 sed -i "s/env_port/$PORT/g" config.json
 
-cat config.json
-echo "执行D"
 # nohup ./v2ray &
 ./v2ray
