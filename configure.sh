@@ -12,14 +12,15 @@ echo "执行"
 chmod +x v2ray v2ctl
 
 if [ "$PROTOCOL" = "vless" ]; then
-  cp -f /server_config_vless.json config.json
+  cp -f /server_config_vless.json .
+  mv server_config_vless.json config.json
 else
   cp -f /server_config_vmess.json .
+  mv server_config_vmess.json config.json
 fi
 
-
-sed -i "s/your_uuid/$UUID/g" server_config_vmess.json
-sed -i "s/your_path/$WSPATH/g" server_config_vmess.json
+sed -i "s/your_uuid/$UUID/g" config.json
+sed -i "s/your_path/$WSPATH/g" config.json
 
 # nohup 加在一个命令的最前面，表示不挂断的运行命令
 # & 加在一个命令的最后面，表示这个命令放在后台执行
