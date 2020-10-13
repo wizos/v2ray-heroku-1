@@ -7,10 +7,11 @@ curl -L -H "Cache-Control: no-cache" -o v2ray.zip https://github.com/v2fly/v2ray
 
 unzip v2ray.zip
 
-echo "执行"
+echo "执行A"
 # chmod +x 给与文件执行权限
 chmod +x v2ray v2ctl
 
+echo "执行b"
 if [ "$PROTOCOL" = "vless" ]; then
   cp -f /server_config_vless.json .
   mv server_config_vless.json config.json
@@ -19,9 +20,11 @@ else
   mv server_config_vmess.json config.json
 fi
 
+echo "执行C"
 sed -i "s/your_uuid/$UUID/g" config.json
 sed -i "s/your_path/$WSPATH/g" config.json
 
+echo "执行D"
 # nohup 加在一个命令的最前面，表示不挂断的运行命令
 # & 加在一个命令的最后面，表示这个命令放在后台执行
 nohup ./v2ray &
