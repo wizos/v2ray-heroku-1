@@ -1,11 +1,7 @@
 cd /v2ray
 
 # Download V2Ray
-if [ "$VER" = "latest" ]; then
-  wget --no-check-certificate -O v2ray.zip https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-64.zip
-else
-  wget --no-check-certificate -O v2ray.zip http://github.com/v2fly/v2ray-core/releases/download/v$VER/v2ray-linux-64.zip
-fi
+wget --no-check-certificate -O v2ray.zip https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-64.zip
 
 unzip v2ray.zip
 
