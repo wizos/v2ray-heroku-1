@@ -23,6 +23,7 @@ fi
 echo "执行C"
 sed -i "s/your_uuid/$UUID/g" config.json
 sed -i "s/your_path/$WSPATH/g" config.json
+sed -i "s/env_port/$PORT/g" config.json
 
 cat config.json
 echo "执行D"
