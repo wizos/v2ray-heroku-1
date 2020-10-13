@@ -1,14 +1,26 @@
 {
-  "name": "V2Ray",
-  "description": "Deploy V2Ray to Heroku.",
-  "keywords": ["V2Ray"],
-  "env": {
-    "UUID": {
-       "description": "VMess client UUID",
-       "value": "91cb66ba-a373-43a0-8169-33d4eeaeb857"
-     }
-  },
-  "stack": "container",
-  "website": "https://github.com/xiaokaixuan/v2ray-heroku",
-  "repository": "https://github.com/xiaokaixuan/v2ray-heroku"
- }
+    "name":"V2Ray",
+    "description":"Deploy V2Ray on Heroku.",
+    "keywords":["V2Ray"],
+    "env":{
+        "VER":{
+            "description":"Core version",
+            "value":"4.25.1"
+        },
+        "PROTOCOL":{
+            "description":"Service protocol",
+            "value":"vmess"
+        },
+        "UUID":{
+            "description":"User UUID",
+            "value":"ad806487-2d26-4636-98b6-ab85cc8521f7"
+        },
+        "PATH":{
+            "description":"WsSettings path",
+            "value":""
+        }
+    },
+    "website":"https://ibcl.us/Heroku-V2Ray_20191014/",
+    "repository":"https://github.com/wizos/v2heroku",
+    "stack":"container"
+}

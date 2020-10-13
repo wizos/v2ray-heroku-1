@@ -1,18 +1,32 @@
 #!/bin/sh
 
+mkdir /v2ray
 cd /v2ray
 
-CONFIG_TLS=${DOMAIN:+,\"security\":\"tls\",\"tlsSettings\":{\"serverName\":\"${DOMAIN}\",\"certificates\":[{\"certificateFile\":\"cert.pem\",\"keyFile\":\"key.pem\"\}]\}}
-CONFIG_JSON1={\"log\":{\"access\":\"\",\"error\":\"\",\"loglevel\":\"warning\"},\"inbounds\":[{\"protocol\":\"vmess\",\"port\":
-CONFIG_JSON2=,\"settings\":{\"clients\":[{\"id\":\"
-[ ${CONFIG_TLS} ] && [ ! -e cert.pem -o ! -e key.pem ] && CONFIG_TLS=
-CONFIG_JSON3=\",\"alterId\":64}]},\"streamSettings\":{\"network\":\"ws\"${CONFIG_TLS}}}],\"outbounds\":[{\"protocol\":\"freedom\",\"settings\":{}}]}
+# Download V2Ray
+if [ "$VER" = "latest" ]; then
+  wget --no-check-certificate -O v2ray.zip https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-64.zip
+else
+  wget --no-check-certificate -O v2ray.zip http://github.com/v2fly/v2ray-core/releases/download/v$VER/v2ray-linux-64.zip
+fi
 
-echo -e -n "$CONFIG_JSON1" >  config.json
-echo -e -n "$PORT" >> config.json
-echo -e -n "$CONFIG_JSON2" >> config.json
-echo -e -n "$UUID" >> config.json
-echo -e -n "$CONFIG_JSON3" >> config.json
+unzip v2ray.zip
 
-exec /v2ray/v2ray -config config.json
+# chmod +x 给与文件执行权限
+chmod +x v2ray v2ctl
 
+if [ "$PROTOCOL" = "vless" ]; then
+  # cp 是复制，-f 是强制复制
+  cp -f /server_config_vless.json config.json
+else
+  cp -f /server_config_vmess.json config.json
+fi
+
+# sed -i 就是直接对文本文件进行操作
+# sed -i 's/原字符串/新字符串/g' 文件地址
+sed -i "s/your_uuid/$UUID/g" config.json
+sed -i "s/your_path/$PATH/g" config.json
+
+# nohup 加在一个命令的最前面，表示不挂断的运行命令
+# & 加在一个命令的最后面，表示这个命令放在后台执行
+nohup ./v2ray &
