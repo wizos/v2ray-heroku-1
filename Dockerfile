@@ -6,6 +6,6 @@ RUN mkdir -m 777 /v2ray
 
 COPY server_config_vmess.json /server_config_vmess.json
 COPY server_config_vless.json /server_config_vless.json
-ADD entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-CMD /entrypoint.sh
+ADD configure.sh /configure.sh
+RUN chmod +x /configure.sh
+CMD /configure.sh
