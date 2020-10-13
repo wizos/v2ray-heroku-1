@@ -24,7 +24,7 @@ echo "执行C"
 sed -i "s/your_uuid/$UUID/g" config.json
 sed -i "s/your_path/$WSPATH/g" config.json
 
+cat config.json
 echo "执行D"
-# nohup 加在一个命令的最前面，表示不挂断的运行命令
-# & 加在一个命令的最后面，表示这个命令放在后台执行
-nohup ./v2ray &
+# nohup ./v2ray &
+./v2ray
