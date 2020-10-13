@@ -12,14 +12,12 @@ echo "执行"
 chmod +x v2ray v2ctl
 
 if [ "$PROTOCOL" = "vless" ]; then
-  # cp 是复制，-f 是强制复制
   cp -f /server_config_vless.json config.json
 else
   cp -f /server_config_vmess.json config.json
 fi
 
-# sed -i 就是直接对文本文件进行操作
-# sed -i 's/原字符串/新字符串/g' 文件地址
+
 sed -i "s/your_uuid/$UUID/g" config.json
 sed -i "s/your_path/$PATH/g" config.json
 
