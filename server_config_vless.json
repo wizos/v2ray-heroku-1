@@ -1,10 +1,10 @@
 {
     "log":{
-        "loglevel":"warning"
+        "loglevel":"error"
     },
     "inbound":{
         "protocol":"vless",
-        "port":8080,
+        "port":env_port,
         "settings":{
             "clients":[
                 {

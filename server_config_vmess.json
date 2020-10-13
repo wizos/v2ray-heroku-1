@@ -1,6 +1,6 @@
 {
     "log":{
-        "loglevel":"debug"
+        "loglevel":"error"
     },
     "inbound":{
         "protocol":"vmess",

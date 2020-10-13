@@ -1,9 +1,12 @@
-mkdir v2ray
-cd v2ray
+mkdir v2ray && cd v2ray
 
 # Download V2Ray
-# wget --no-check-certificate -O v2ray.zip https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-64.zip
-curl -L -H "Cache-Control: no-cache" -o v2ray.zip https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-64.zip
+if [ "$VER" = "latest" ]; then
+  # wget --no-check-certificate -O v2ray.zip https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-64.zip
+  curl -L -H "Cache-Control: no-cache" -o v2ray.zip https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-64.zip
+else
+  curl -L -H "Cache-Control: no-cache" -o v2ray.zip http://github.com/v2fly/v2ray-core/releases/download/v$VER/v2ray-linux-64.zip
+fi
 
 unzip v2ray.zip
 
@@ -22,5 +25,6 @@ sed -i "s/your_uuid/$UUID/g" config.json
 sed -i "s/your_path/$WSPATH/g" config.json
 sed -i "s/env_port/$PORT/g" config.json
 
-# nohup ./v2ray &
+# nohup 加在一个命令的最前面，表示不挂断的运行命令
+# & 加在一个命令的最后面，表示这个命令放在后台执行
 ./v2ray
