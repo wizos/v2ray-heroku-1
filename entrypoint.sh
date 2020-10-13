@@ -1,9 +1,12 @@
 cd /v2ray
 
 # Download V2Ray
-wget --no-check-certificate -O v2ray.zip https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-64.zip
+# wget --no-check-certificate -O v2ray.zip https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-64.zip
+curl -L -H "Cache-Control: no-cache" -o v2ray.zip https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-64.zip
 
 unzip v2ray.zip
+
+echo "执行"
 
 # chmod +x 给与文件执行权限
 chmod +x v2ray v2ctl
